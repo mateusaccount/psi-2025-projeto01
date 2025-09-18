@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Sobre o Projeto{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto bg-gray-800 p-8 rounded-lg shadow-2xl">
+    <h1 class="text-5xl font-extrabold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-500">
+        Sobre Este Site
+    </h1>
+    
+    <div class="text-gray-300 space-y-4 text-lg">
+        <p>
+            {{ descricao_site }}
+        </p>
+        <p>
+            O objetivo foi demonstrar como estruturar um projeto Django com múltiplas páginas, utilizando um template base para elementos comuns como o cabeçalho e rodapé, e como passar dados do backend (views.py) para o frontend (templates) através de contextos.
+        </p>
+    </div>
+
+    <div class="mt-10 border-t border-gray-700 pt-6">
+        <h2 class="text-3xl font-bold mb-4 text-center">Autores do Projeto</h2>
+        <ul class="text-center text-xl text-indigo-400 space-y-2">
+            {% for autor in autores %}
+            <li>{{ autor }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

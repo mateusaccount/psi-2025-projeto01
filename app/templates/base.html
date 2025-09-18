@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{{ titulo_site }} - {% block title %}{% endblock %}</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col min-h-screen">
+
+    <header class="bg-gray-800 shadow-lg">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="{% url 'inicio' %}" class="text-2xl font-bold text-white hover:text-indigo-400 transition-colors">
+                {{ titulo_site }}
+            </a>
+            <ul class="flex space-x-6">
+                <li><a href="{% url 'inicio' %}" class="hover:text-indigo-400 transition-colors">Início</a></li>
+                <li><a href="{% url 'equipe' %}" class="hover:text-indigo-400 transition-colors">Equipe</a></li>
+                <li><a href="{% url 'sobre' %}" class="hover:text-indigo-400 transition-colors">Sobre</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="flex-grow container mx-auto px-6 py-12">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 py-6 mt-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; {{ ano_copyright }} {{ titulo_site }}. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

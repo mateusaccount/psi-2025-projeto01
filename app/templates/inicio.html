@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-500">
+        Bem-vindo ao site do {{ titulo_site }}!
+    </h1>
+    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+        A equipe que representa a força e a garra da colina.
+</div>
+
+<div class="mt-16 grid md:grid-cols-2 gap-12 items-center">
+    <div>
+        <h2 class="text-3xl font-bold mb-4">Nossa História</h2>
+        <p class="text-gray-400 mb-4">
+            História do Vasco
+        </p>
+        <p class="text-gray-400">
+            nossa gloriosa história.
+        </p>
+    </div>
+    <div class="rounded-lg overflow-hidden shadow-2xl">
+        <img src="https://placehold.co/600x400/333/FFF?text=Estádio+do+Vasco" alt="" class="w-full h-full object-cover">
+    </div>
+</div>
+{% endblock %}
