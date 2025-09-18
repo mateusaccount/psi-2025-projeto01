@@ -11,77 +11,77 @@ info_site = {
 
 dados_equipe = [
     {
-        'foto': 'https://placehold.co/400x400/222/FFF?text=GOL',
-        'nome': 'Carlos Rocha',
-        'idade': 28,
+        'foto': 'images/LeoJardim.png',
+        'nome': 'Leo Jardim',
+        'idade': 30,
         'posicao': 'Goleiro',
-        'naturalidade': 'São Paulo, SP'
+        'naturalidade': 'Ribeirão Preto, SP'
     },
     {
-        'foto': 'https://placehold.co/400x400/333/FFF?text=ZAG',
+        'foto': 'images/Cuesta.png',
         'nome': 'Bruno Alves',
         'idade': 31,
         'posicao': 'Zagueiro',
         'naturalidade': 'Rio de Janeiro, RJ'
     },
     {
-        'foto': 'https://placehold.co/400x400/444/FFF?text=ZAG',
+        'foto': 'images/RobertRenan.png',
         'nome': 'Felipe Lima',
         'idade': 26,
         'posicao': 'Zagueiro',
         'naturalidade': 'Belo Horizonte, MG'
     },
     {
-        'foto': 'https://placehold.co/400x400/555/FFF?text=LAT',
+        'foto': 'images/PH.png',
         'nome': 'Ricardo Gomes',
         'idade': 24,
         'posicao': 'Lateral Direito',
         'naturalidade': 'Porto Alegre, RS'
     },
     {
-        'foto': 'https://placehold.co/400x400/666/FFF?text=LAT',
+        'foto': 'images/LucasPiton.png',
         'nome': 'Lucas Martins',
         'idade': 27,
         'posicao': 'Lateral Esquerdo',
         'naturalidade': 'Curitiba, PR'
     },
     {
-        'foto': 'https://placehold.co/400x400/777/FFF?text=VOL',
+        'foto': 'images/TcheTche.png',
         'nome': 'André Souza',
         'idade': 29,
         'posicao': 'Volante',
         'naturalidade': 'Salvador, BA'
     },
     {
-        'foto': 'https://placehold.co/400x400/888/FFF?text=MEI',
+        'foto': 'images/Coutinho.png',
         'nome': 'Gabriel Costa',
         'idade': 25,
         'posicao': 'Meio-campo',
         'naturalidade': 'Fortaleza, CE'
     },
     {
-        'foto': 'https://placehold.co/400x400/999/FFF?text=MEI',
+        'foto': 'images/AndresGomez.png',
         'nome': 'Thiago Pereira',
         'idade': 22,
         'posicao': 'Meia Atacante',
         'naturalidade': 'Recife, PE'
     },
     {
-        'foto': 'https://placehold.co/400x400/AAA/FFF?text=ATA',
+        'foto': 'images/Dvd.png',
         'nome': 'Matheus Oliveira',
         'idade': 30,
         'posicao': 'Atacante',
         'naturalidade': 'Manaus, AM'
     },
     {
-        'foto': 'https://placehold.co/400x400/BBB/FFF?text=ATA',
+        'foto': 'images/NunoMendes.png',
         'nome': 'Pedro Henrique',
         'idade': 23,
         'posicao': 'Ponta Direita',
         'naturalidade': 'Goiânia, GO'
     },
     {
-        'foto': 'https://placehold.co/400x400/CCC/FFF?text=ATA',
+        'foto': 'images/Vegetti.png',
         'nome': 'Rafael Santos',
         'idade': 28,
         'posicao': 'Centroavante',

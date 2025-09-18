@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Página Inicial{% endblock %}
 
@@ -22,7 +23,7 @@
         </p>
     </div>
     <div class="rounded-lg overflow-hidden shadow-2xl">
-        <img src="https://placehold.co/600x400/333/FFF?text=Estádio+do+Vasco" alt="" class="w-full h-full object-cover">
+        <img src="{% static 'images/SãoJanuario.webp' %}" alt="São Januario" class="mx-auto w-100 h-100 rounded-circle">
     </div>
 </div>
 {% endblock %}
