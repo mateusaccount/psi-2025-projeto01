@@ -2,11 +2,11 @@ from django.shortcuts import render
 
 info_site = {
     'titulo_site': 'Vasco da Gama',
-    'ano_copyright': 2024,
+    'ano_copyright': 2025,
     'autores': [
         'Mateus Cosme',
     ],
-    'descricao_site': 'Este é um site de demonstração criado com Django para apresentar uma equipe esportiva fictícia. Todos os dados são fictícios.'
+    'descricao_site': 'Este é um site de demonstração criado com Django para apresentar a equipe do Vasco da Gama. Todos os dados são reais.'
 }
 
 dados_equipe = [
@@ -15,77 +15,77 @@ dados_equipe = [
         'nome': 'Leo Jardim',
         'idade': 30,
         'posicao': 'Goleiro',
-        'naturalidade': 'Ribeirão Preto, SP'
+        'naturalidade': 'Ribeirão Preto, São Paulo'
     },
     {
         'foto': 'images/Cuesta.png',
-        'nome': 'Bruno Alves',
-        'idade': 31,
+        'nome': 'Carlos Cuesta',
+        'idade': 26,
         'posicao': 'Zagueiro',
-        'naturalidade': 'Rio de Janeiro, RJ'
+        'naturalidade': 'Quibdó, Colombia'
     },
     {
         'foto': 'images/RobertRenan.png',
-        'nome': 'Felipe Lima',
-        'idade': 26,
+        'nome': 'Robert Renan',
+        'idade': 21,
         'posicao': 'Zagueiro',
-        'naturalidade': 'Belo Horizonte, MG'
+        'naturalidade': 'Brasília, Distrito Federal'
     },
     {
         'foto': 'images/PH.png',
-        'nome': 'Ricardo Gomes',
-        'idade': 24,
+        'nome': 'Paulo Henrique',
+        'idade': 29,
         'posicao': 'Lateral Direito',
-        'naturalidade': 'Porto Alegre, RS'
+        'naturalidade': 'Sete Barras, São Paulo'
     },
     {
         'foto': 'images/LucasPiton.png',
-        'nome': 'Lucas Martins',
-        'idade': 27,
+        'nome': 'Lucas Piton',
+        'idade': 24,
         'posicao': 'Lateral Esquerdo',
-        'naturalidade': 'Curitiba, PR'
+        'naturalidade': 'Jundiaí, São Paulo'
     },
     {
         'foto': 'images/TcheTche.png',
-        'nome': 'André Souza',
-        'idade': 29,
+        'nome': 'Tchê Tchê',
+        'idade': 33,
         'posicao': 'Volante',
-        'naturalidade': 'Salvador, BA'
+        'naturalidade': 'São Paulo, São Paulo'
     },
     {
         'foto': 'images/Coutinho.png',
-        'nome': 'Gabriel Costa',
-        'idade': 25,
+        'nome': 'Philippe Coutinho',
+        'idade': 33,
         'posicao': 'Meio-campo',
-        'naturalidade': 'Fortaleza, CE'
+        'naturalidade': 'Rio de Janeiro, Rio de Janeiro'
     },
     {
         'foto': 'images/AndresGomez.png',
-        'nome': 'Thiago Pereira',
-        'idade': 22,
+        'nome': 'Andrés Gómez',
+        'idade': 23,
         'posicao': 'Meia Atacante',
-        'naturalidade': 'Recife, PE'
+        'naturalidade': 'Quibdó, Colômbia'
     },
     {
         'foto': 'images/Dvd.png',
-        'nome': 'Matheus Oliveira',
-        'idade': 30,
+        'nome': 'David Corrêa',
+        'idade': 29,
         'posicao': 'Atacante',
-        'naturalidade': 'Manaus, AM'
+        'naturalidade': 'Vitória, Espírito Santo'
     },
     {
-        'foto': 'images/NunoMendes.png',
-        'nome': 'Pedro Henrique',
-        'idade': 23,
+        'foto': 'images/NunoMoreira.png',
+        'nome': 'Nuno Moreira',
+        'idade': 26,
         'posicao': 'Ponta Direita',
-        'naturalidade': 'Goiânia, GO'
+        'naturalidade': 'Espinho, Portugal'
     },
     {
         'foto': 'images/Vegetti.png',
-        'nome': 'Rafael Santos',
-        'idade': 28,
+        'nome': 'Pablo Vegetti',
+        'idade': 36,
         'posicao': 'Centroavante',
-        'naturalidade': 'Florianópolis, SC'
+        'naturalidade': 'Santo Domingo, Argentina'
     }
 ]
 
@@ -101,7 +101,6 @@ def pagina_equipe(request):
     context.update(info_site)
     return render(request, 'equipe.html', context)
 
-# View para a página sobre
 def pagina_sobre(request):
     context = {}
     context.update(info_site)
