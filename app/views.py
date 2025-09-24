@@ -101,7 +101,31 @@ def pagina_equipe(request):
     context.update(info_site)
     return render(request, 'equipe.html', context)
 
+def pagina_blog(request):
+    context = {}
+    context.update(request, 'blog.html', context)
+
 def pagina_sobre(request):
     context = {}
     context.update(info_site)
     return render(request, 'sobre.html', context)
+
+def post_list(request):
+    """
+    View para listar todos os posts do blog, ordenados pela data de publicação.
+    """
+    posts = Post.objects.all().order_by('-data_publicacao')
+    context = {
+        'posts': posts
+    }
+    return render(request, 'blog_app/post_list.html', context)
+
+def post_detail(request, pk):
+    """
+    View para exibir os detalhes de uma única postagem.
+    """
+    post = get_object_or_404(Post, pk=pk)
+    context = {
+        'post': post
+    }
+    return render(request, 'blog_app/post_detail.html', context)
