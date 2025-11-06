@@ -9,3 +9,13 @@ class Post(models.Model):
 
     def __str__(self):
         return self.titulo
+
+class Jogador(models.Model):
+    nome = models.CharField(max_length=100)
+    idade = models.IntegerField()
+    posicao = models.CharField(max_length=50)
+    naturalidade = models.CharField(max_length=100)
+    foto = models.ImageField(upload_to='images/jogadores/')
+
+    def __str__(self):
+        return self.nome

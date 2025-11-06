@@ -13,11 +13,10 @@
     </p>
 </div>
 
-<!-- Grid para exibir os membros da equipe -->
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
     {% for membro in equipe %}
     <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
-        <img src="{% static membro.foto %}" alt="[Foto de {{ membro.nome }}]" class="w-full h-100 object-cover">
+        <img src="{{ membro.foto.url }}" alt="[Foto de {{ membro.nome }}]" class="w-full h-80 object-cover object-top">
         <div class="p-6">
             <h3 class="text-2xl font-bold mb-2">{{ membro.nome }}</h3>
             <p class="text-indigo-400 font-semibold mb-2">{{ membro.posicao }}</p>
