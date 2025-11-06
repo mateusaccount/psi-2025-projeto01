@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from .models import Post
 
 info_site = {
     'titulo_site': 'Vasco da Gama',
@@ -102,30 +103,34 @@ def pagina_equipe(request):
     return render(request, 'equipe.html', context)
 
 def pagina_blog(request):
-    context = {}
-    context.update(request, 'blog.html', context)
+    """
+    View para listar todos os posts do blog.
+    """
+    # Busca todos os posts no banco, ordenados do mais novo para o mais antigo
+    posts = Post.objects.all().order_by('-data_publicacao')
+    
+    context = {
+        'posts': posts
+    }
+    context.update(info_site)
+    return render(request, 'blog.html', context) # Caminho corrigido
 
 def pagina_sobre(request):
     context = {}
     context.update(info_site)
     return render(request, 'sobre.html', context)
 
-def post_list(request):
-    """
-    View para listar todos os posts do blog, ordenados pela data de publicação.
-    """
-    posts = Post.objects.all().order_by('-data_publicacao')
-    context = {
-        'posts': posts
-    }
-    return render(request, 'blog_app/post_list.html', context)
+# A view 'post_list' foi REMOVIDA daqui, pois sua lógica foi unificada na 'pagina_blog'.
 
 def post_detail(request, pk):
     """
     View para exibir os detalhes de uma única postagem.
     """
+    # Busca o post pelo ID (pk) ou retorna um erro 404 se não existir
     post = get_object_or_404(Post, pk=pk)
+    
     context = {
         'post': post
     }
-    return render(request, 'blog_app/post_detail.html', context)
+    context.update(info_site) # Adicionado para o base.html funcionar
+    return render(request, 'post.html', context) # Caminho corrigido

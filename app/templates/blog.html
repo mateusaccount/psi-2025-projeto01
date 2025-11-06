@@ -1,39 +1,49 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Meu Blog Simples</title>
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-    </style>
-</head>
-<body class="bg-gray-100 text-gray-800 flex flex-col min-h-screen">
+{% extends 'base.html' %}
+{% load static %}
 
-    <!-- Header -->
-    <header class="bg-white shadow-md">
-        <nav class="container mx-auto px-6 py-4">
-            <div class="flex justify-center items-center">
-                <a href="{% url 'post_list' %}" class="text-3xl font-bold text-gray-800 hover:text-blue-600 transition-colors">
-                    Blog do Desenvolvedor
-                </a>
-            </div>
-        </nav>
-    </header>
+{% block title %}Blog{% endblock %}
 
-    <!-- Conteúdo principal -->
-    <main class="flex-grow container mx-auto px-6 py-12">
-        {% block content %}
-        {% endblock %}
-    </main>
+{% block content %}
+<div class="text-center mb-12">
+    <h1 class="text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-500">
+        Nosso Blog
+    </h1>
+    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+        Fique por dentro das últimas notícias e análises sobre o Vascão.
+    </p>
+</div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300 py-6 mt-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2025 | Desenvolvido por Mateus Cosme.</p>
+<!-- Grid para os posts do blog -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {% for post in posts %}
+    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg flex flex-col transform hover:scale-105 transition-transform duration-300">
+        {% if post.imagem %}
+        <img src="{{ post.imagem.url }}" alt="{{ post.titulo }}" class="w-full h-56 object-cover">
+        {% else %}
+        <!-- Um placeholder se não houver imagem -->
+        <div class="w-full h-56 bg-gray-700 flex items-center justify-center">
+            <span class="text-gray-500">Sem imagem</span>
         </div>
-    </footer>
-
-</body>
-</html>
+        {% endif %}
+        
+        <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-2xl font-bold mb-3">{{ post.titulo }}</h3>
+            <p class="text-gray-400 text-sm mb-4">
+                Publicado em: {{ post.data_publicacao|date:"d/m/Y" }}
+            </p>
+            <p class="text-gray-300 mb-4 flex-grow">
+                <!-- Mostra um trecho do texto (opcional) -->
+                {{ post.texto|truncatewords:20|linebreaks }}
+            </p>
+            <a href="{% url 'post_detail' post.pk %}" class="mt-auto inline-block bg-indigo-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors text-center">
+                Leia mais &rarr;
+            </a>
+        </div>
+    </div>
+    {% empty %}
+    <p class="col-span-full text-center text-gray-400 text-2xl">
+        Nenhum post encontrado ainda.
+    </p>
+    {% endfor %}
+</div>
+{% endblock %}
