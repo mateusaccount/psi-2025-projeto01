@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Confirmar Exclusão{% endblock %}
+
+{% block content %}
+<div class="max-w-lg mx-auto bg-gray-800 p-8 rounded-lg shadow-2xl text-center">
+    <h1 class="text-3xl font-bold mb-4 text-white">Tem certeza?</h1>
+    
+    <p class="text-xl text-gray-300 mb-6">
+        Você está prestes a excluir permanentemente o jogador: 
+        <strong class="text-red-400">{{ jogador.nome }}</strong>.
+    </p>
+    <p class="text-gray-400 mb-8">Esta ação não pode ser desfeita.</p>
+    
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="flex justify-center space-x-4">
+            <a href="{% url 'equipe' %}" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg">
+                Cancelar
+            </a>
+            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg shadow-md">
+                Sim, Excluir
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

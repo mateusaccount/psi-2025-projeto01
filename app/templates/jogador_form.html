@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}{{ titulo_pagina }}{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-gray-800 p-8 rounded-lg shadow-2xl">
+    <h1 class="text-3xl font-bold mb-6 text-white">{{ titulo_pagina }}</h1>
+    
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="space-y-4">
+            
+            {% for field in form %}
+            <div>
+                <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-300">
+                    {{ field.label }}
+                </label>
+                <div class="mt-1">
+                    
+                    {% if field.name == 'foto' %}
+                        
+                        <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" 
+                               id="{{ field.id_for_label }}"
+                               class="block w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                        
+                        {% if field.value %}
+                        <p class="text-gray-400 text-xs mt-1">Atual: {{ field.value }}</p>
+                        {% endif %}
+                    
+                    {% else %}
+                        
+                        <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" 
+                               id="{{ field.id_for_label }}"
+                               value="{{ field.value|default:'' }}"
+                               class="block w-full bg-gray-700 border-gray-600 rounded-md shadow-sm text-white focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-3">
+                    
+                    {% endif %}
+                </div>
+                
+                {% if field.errors %}
+                <p class="mt-1 text-sm text-red-400">{{ field.errors|first }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+        </div>
+        
+        <div class="mt-8 flex justify-between">
+            <a href="{% url 'equipe' %}" class="text-gray-400 hover:text-white py-2 px-4">
+                Cancelar
+            </a>
+            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-lg shadow-md">
+                Salvar
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

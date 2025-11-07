@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Post
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import user_passes_test
+from .models import Post, Jogador
+from .forms import JogadorForm
 
 info_site = {
     'titulo_site': 'Vasco da Gama',
@@ -10,127 +12,90 @@ info_site = {
     'descricao_site': 'Este é um site de demonstração criado com Django para apresentar a equipe do Vasco da Gama. Todos os dados são reais.'
 }
 
-dados_equipe = [
-    {
-        'foto': 'images/LeoJardim.png',
-        'nome': 'Leo Jardim',
-        'idade': 30,
-        'posicao': 'Goleiro',
-        'naturalidade': 'Ribeirão Preto, São Paulo'
-    },
-    {
-        'foto': 'images/Cuesta.png',
-        'nome': 'Carlos Cuesta',
-        'idade': 26,
-        'posicao': 'Zagueiro',
-        'naturalidade': 'Quibdó, Colombia'
-    },
-    {
-        'foto': 'images/RobertRenan.png',
-        'nome': 'Robert Renan',
-        'idade': 21,
-        'posicao': 'Zagueiro',
-        'naturalidade': 'Brasília, Distrito Federal'
-    },
-    {
-        'foto': 'images/PH.png',
-        'nome': 'Paulo Henrique',
-        'idade': 29,
-        'posicao': 'Lateral Direito',
-        'naturalidade': 'Sete Barras, São Paulo'
-    },
-    {
-        'foto': 'images/LucasPiton.png',
-        'nome': 'Lucas Piton',
-        'idade': 24,
-        'posicao': 'Lateral Esquerdo',
-        'naturalidade': 'Jundiaí, São Paulo'
-    },
-    {
-        'foto': 'images/TcheTche.png',
-        'nome': 'Tchê Tchê',
-        'idade': 33,
-        'posicao': 'Volante',
-        'naturalidade': 'São Paulo, São Paulo'
-    },
-    {
-        'foto': 'images/Coutinho.png',
-        'nome': 'Philippe Coutinho',
-        'idade': 33,
-        'posicao': 'Meio-campo',
-        'naturalidade': 'Rio de Janeiro, Rio de Janeiro'
-    },
-    {
-        'foto': 'images/AndresGomez.png',
-        'nome': 'Andrés Gómez',
-        'idade': 23,
-        'posicao': 'Meia Atacante',
-        'naturalidade': 'Quibdó, Colômbia'
-    },
-    {
-        'foto': 'images/Dvd.png',
-        'nome': 'David Corrêa',
-        'idade': 29,
-        'posicao': 'Atacante',
-        'naturalidade': 'Vitória, Espírito Santo'
-    },
-    {
-        'foto': 'images/NunoMoreira.png',
-        'nome': 'Nuno Moreira',
-        'idade': 26,
-        'posicao': 'Ponta Direita',
-        'naturalidade': 'Espinho, Portugal'
-    },
-    {
-        'foto': 'images/Vegetti.png',
-        'nome': 'Pablo Vegetti',
-        'idade': 36,
-        'posicao': 'Centroavante',
-        'naturalidade': 'Santo Domingo, Argentina'
-    }
-]
+def superuser_required(view_func):
+    return user_passes_test(lambda u: u.is_authenticated and u.is_superuser, login_url='/admin/login/')(view_func)
 
 def pagina_inicio(request):
     context = {}
     context.update(info_site)
     return render(request, 'inicio.html', context)
 
+def pagina_sobre(request):
+    context = {}
+    context.update(info_site)
+    return render(request, 'sobre.html', context)
+
 def pagina_equipe(request):
+    jogadores_do_banco = Jogador.objects.all().order_by('nome') 
+    
     context = {
-        'equipe': dados_equipe,
+        'equipe': jogadores_do_banco,
     }
     context.update(info_site)
     return render(request, 'equipe.html', context)
 
 def pagina_blog(request):
-    """
-    View para listar todos os posts do blog.
-    """
-    # Busca todos os posts no banco, ordenados do mais novo para o mais antigo
     posts = Post.objects.all().order_by('-data_publicacao')
     
     context = {
         'posts': posts
     }
     context.update(info_site)
-    return render(request, 'blog.html', context) # Caminho corrigido
-
-def pagina_sobre(request):
-    context = {}
-    context.update(info_site)
-    return render(request, 'sobre.html', context)
-
-# A view 'post_list' foi REMOVIDA daqui, pois sua lógica foi unificada na 'pagina_blog'.
+    return render(request, 'blog.html', context)
 
 def post_detail(request, pk):
-    """
-    View para exibir os detalhes de uma única postagem.
-    """
-    # Busca o post pelo ID (pk) ou retorna um erro 404 se não existir
     post = get_object_or_404(Post, pk=pk)
     
     context = {
         'post': post
     }
-    context.update(info_site) # Adicionado para o base.html funcionar
-    return render(request, 'post.html', context) # Caminho corrigido
+    context.update(info_site)
+    return render(request, 'post.html', context)
+
+@superuser_required
+def jogador_novo(request):
+    if request.method == 'POST':
+        form = JogadorForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('equipe')
+    else:
+        form = JogadorForm()
+        
+    context = {
+        'form': form,
+        'titulo_pagina': 'Adicionar Novo Jogador'
+    }
+    context.update(info_site)
+    return render(request, 'jogador_form.html', context)
+
+@superuser_required # 3. Segurança!
+def jogador_editar(request, pk):
+    jogador = get_object_or_404(Jogador, pk=pk)
+    
+    if request.method == 'POST':
+        form = JogadorForm(request.POST, request.FILES, instance=jogador)
+        if form.is_valid():
+            form.save()
+            return redirect('equipe')
+    else:
+        form = JogadorForm(instance=jogador)
+        
+    context = {
+        'form': form,
+        'titulo_pagina': f'Editando: {jogador.nome}'
+    }
+    context.update(info_site)
+    return render(request, 'jogador_form.html', context)
+
+@superuser_required
+def jogador_excluir(request, pk):
+    jogador = get_object_or_404(Jogador, pk=pk)
+    
+    if request.method == 'POST':
+        jogador.delete()
+        return redirect('equipe')
+    
+    context = {'jogador': jogador}
+    context.update(info_site)
+    return render(request, 'jogador_confirm_delete.html', context)
